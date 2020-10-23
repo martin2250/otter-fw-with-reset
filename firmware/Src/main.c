@@ -140,6 +140,19 @@ int main(void)
   stusb_update_pdo(3, 20000, 4000);
   stusb_set_valid_pdo(3);
 
+  // reset display at PA10
+
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  GPIO_InitStruct.Pin = GPIO_PIN_10;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
+  HAL_Delay(10);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
+}
+
   // now display
   HAL_Delay(200);
   disp_init();

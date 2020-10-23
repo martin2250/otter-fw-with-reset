@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:OtterIron_PRO_Top-cache
 EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
@@ -324,7 +323,7 @@ Wire Wire Line
 Wire Wire Line
 	8050 2800 9150 2800
 $Comp
-L Power_Protection:USBLC6-2SC6 U1
+L OtterIron_PRO_Top-rescue:USBLC6-2SC6-Power_Protection U1
 U 1 1 5BF3991B
 P 3450 3350
 F 0 "U1" H 3450 4028 50  0000 C CNN
@@ -456,7 +455,7 @@ Wire Wire Line
 Connection ~ 3500 7950
 Connection ~ 3500 7850
 $Comp
-L otter:STUSB4500 U3
+L OtterIron_PRO_Top-rescue:STUSB4500-otter U3
 U 1 1 5CE79B83
 P 4300 7900
 F 0 "U3" H 4600 7150 50  0000 C CNN
