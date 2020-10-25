@@ -218,7 +218,7 @@ int main(void)
   HAL_Delay(1000);
   MX_IWDG_Init();
 
-  r.target = *((uint16_t *) 0x0800e400);
+  r.target = 220; // *((uint16_t *) 0x0800e400);
   if (r.target >= 400) r.target = 220;  //initial temp set
 
   while (1)
@@ -231,35 +231,35 @@ int main(void)
 
     if(s.button[0] == 1){
       r.target -= 5;
-      s.writeFlash = 1;
+      // s.writeFlash = 1;
       HAL_Delay(40);
     }
 
     if(s.button[1] == 1){
       r.target += 5;
-      s.writeFlash = 1;
+      // s.writeFlash = 1;
       HAL_Delay(40);
     }
 
     r.target = CLAMP(r.target, 20, 400);
 
-    if(s.writeFlash == 1){
-      HAL_FLASH_Unlock();
-      FLASH->CR |= FLASH_CR_PER;
-      FLASH->AR = 0x0800e400;
-      FLASH->CR |= FLASH_CR_STRT;
-      while ((FLASH->SR & FLASH_SR_BSY) != 0){}
-      if ((FLASH->SR & FLASH_SR_EOP) != 0){
-        FLASH->SR |= FLASH_SR_EOP;
-        FLASH->CR &= ~FLASH_CR_PER;
-        HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, 0x0800e400, (uint16_t)r.target);
-        HAL_FLASH_Lock();
-        s.writeFlash = 0;
-      }
-      #ifdef DISPLAYCURRENT
-            s.timeout = 12;
-      #endif
-    }
+    // if(s.writeFlash == 1){
+    //   HAL_FLASH_Unlock();
+    //   FLASH->CR |= FLASH_CR_PER;
+    //   FLASH->AR = 0x0800e400;
+    //   FLASH->CR |= FLASH_CR_STRT;
+    //   while ((FLASH->SR & FLASH_SR_BSY) != 0){}
+    //   if ((FLASH->SR & FLASH_SR_EOP) != 0){
+    //     FLASH->SR |= FLASH_SR_EOP;
+    //     FLASH->CR &= ~FLASH_CR_PER;
+    //     HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, 0x0800e400, (uint16_t)r.target);
+    //     HAL_FLASH_Lock();
+    //     s.writeFlash = 0;
+    //   }
+    //   #ifdef DISPLAYCURRENT
+    //         s.timeout = 12;
+    //   #endif
+    // }
 
 #ifdef ENABLESERIAL
     // send temperature via USB CDC
